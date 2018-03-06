@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>监听location.hash变化</title>
+</head>
+<body>
+<div id="nav">
+    <li><a href="#/index">index</a></li>
+    <li><a href="#/user">user</a></li>
+    <li><a href="#/login">login</a></li>
+</div>
+<div id="route"></div>
+<script>
+    function Router (){
+        this.routes = {};
+        this.currentURL = ''
+    }
+
+    Router.prototype.route = function(path,callback){
+        this.routes[path] = callback || function(){};
+    }
+
+    Router.prototype.refresh = function(){
+        this.currentURL = location.hash.slice(1) || '/index';
+        this.routes[this.currentURL]();
+    }
+
+    Router.prototype.init = function(){
+        window.addEventListener('load',this.refresh.bind(this),false);
+        window.addEventListener('hashchange',this.refresh.bind(this),false)
+    }
+
+    window.Router=new Router();
+    window.Router.init();
+
+    Router.route('/index',function(){
+        document.getElementById('route').innerHTML = `<h1>index</h1>`
+    })
+    Router.route('/user',()=>{
+        document.getElementById('route').innerHTML = `<h1>user</h1>`
+    })
+    Router.route('/login',()=>{
+        document.getElementById('route').innerHTML = `<h1>login</h1>`
+    })
+
+</script>
+</body>
+</html>
