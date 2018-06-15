@@ -1,7 +1,7 @@
 ## 目录
 * branch:master <a href="#">reactjs小书笔记</a>
-* branch:redux  <a href="#">redux笔记</a>
-* branch:router  <a href="#">redux与router笔记</a>
+* branch:redux  <a href="/tree/redux">redux笔记</a>
+* branch:router  <a href="/tree/router">redux与router实践</a>
 
 ## reactjs小书笔记
 ```javascript
@@ -102,4 +102,62 @@ const mount = (component,wrapper)=>{
         wrapper.removeChild(oldEl)
     }
 }
+```
+### props.children
+```javascript
+class Layout extends Component {
+    render(){
+        return (
+            <header>
+                {this.props.children[0]}
+            </header>
+            <article>
+                {this.props.children[1]}
+            </article>
+            <footer>
+                {this.props.children[2]}
+            </footer>
+        )
+    }
+}
+
+//使用
+<Layout>
+    <header>
+        <div>header</div>
+    </header>
+    <article>
+        <div>article</div>
+    </article>
+    <footer>
+        <div>footer</div>
+    </footer>
+</Layout>
+```
+### PropTypes
+```javascript
+import PropTypes from 'prop-types'
+class Comment extends Component {
+    static propTypes = {
+        comment: PropTypes.object
+    }
+    render(){
+        const { comment } = this.props;
+        return (
+            //这里的comment被要求必须为Object
+            <div>{comment.username}</div>
+        ) 
+    }
+}
+/*
+PropTypes.array
+PropTypes.bool
+PropTypes.func
+PropTypes.number
+PropTypes.object
+PropTypes.string
+PropTypes.node
+PropTypes.element
+...
+*/
 ```
