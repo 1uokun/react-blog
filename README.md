@@ -104,7 +104,7 @@ const mount = (component,wrapper)=>{
 }
 ```
 ### props.children 
-> this.props.children[i]
+> this.props.children`[i]`
 ```javascript
 class Layout extends Component {
     render(){
@@ -162,4 +162,54 @@ PropTypes.node
 PropTypes.element
 ...
 */
+```
+## 高阶组件
+> 什么是高阶组件？
+> 高阶组件就是一个`函数`，传给它一个组件，返回一个新的组件
+```javascript
+//脸庞1  const newComponent = ajaxWithData(Component,url)
+function ajaxWithData(WrapperComponent,url){
+    class NewComponent extends Component {
+        state={data:null}
+        
+        componentDidMount(){
+            fetch(url,{method:"get"})
+            .then(res=>{
+                this.setState({data:res})
+            })
+        }
+        
+        render(){
+            return <WrapperComponent data={this.state.data} />
+        }
+    }
+    return NewComponent
+}
+
+class A extends Component {
+    render(){
+        return (
+            //渲染来自高阶组件封装好的ajax统一逻辑的数据
+            <div>{this.props.data}</div>
+        )
+    }
+}
+
+const newA = ajaxWithData(A,"github.com")
+export default newA;
+```
+> 链式函数 return组件本身 可避免创建新变量
+```javascript
+//脸庞2 Component = ajaxWithData(url)(Component)
+const ajaxWithData = (url)=>(WrapperComponent)=>{
+    //return 自己
+    return class WrapperComponent extends Coponent {
+        //...
+        render(){
+            return (
+                <WrapperComponent data={this.state.data}/>
+            )
+        }
+    }
+}
 ```
