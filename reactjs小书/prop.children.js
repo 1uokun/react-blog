@@ -11,12 +11,9 @@ class Card extends Component {
 }
 
 ReactDOM.render(
-    <Card content={
-        <div>
-            <h2>React.js 小书</h2>
-            <div>开源、免费、专业、简单</div>
-            订阅：<input />
-        </div>
-    } />,
+    <Card
+        one={<One/>}
+        two={<Two/>}
+    />,
     document.getElementById('root')
 )

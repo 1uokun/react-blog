@@ -1,9 +1,10 @@
 ## 目录
 * branch:master <a href="#">reactjs小书笔记</a>
-* branch:redux  <a href="./tree/redux">redux笔记</a>
-* branch:router  <a href="./tree/router">redux与router实践</a>
+* branch:redux  <a href="https://github.com/1uokun/react-dom-cli/tree/redux">redux笔记</a>
+* branch:router  <a href="https://github.com/1uokun/react-dom-cli/tree/router">redux与router实践</a>
 
 ## reactjs小书笔记
+> 父类Component原理
 ```javascript
 //创建LikeButton类
 class LikeButton {
@@ -151,6 +152,7 @@ class Comment extends Component {
         ) 
     }
 }
+//Comment.propTypes = {comment: PropTypes.object}
 /*
 PropTypes.array
 PropTypes.bool
@@ -160,6 +162,7 @@ PropTypes.object
 PropTypes.string
 PropTypes.node
 PropTypes.element
+PropTypes.element.isRequired
 ...
 */
 ```
@@ -213,3 +216,4 @@ const ajaxWithData = (url)=>(WrapperComponent)=>{
     }
 }
 ```
+## context
