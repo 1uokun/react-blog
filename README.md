@@ -1,7 +1,7 @@
 ## 目录
 * branch:master <a href="#">reactjs小书笔记</a>
-* branch:redux  <a href="/tree/redux">redux笔记</a>
-* branch:router  <a href="/tree/router">redux与router实践</a>
+* branch:redux  <a href="./tree/redux">redux笔记</a>
+* branch:router  <a href="./tree/router">redux与router实践</a>
 
 ## reactjs小书笔记
 ```javascript
@@ -103,7 +103,8 @@ const mount = (component,wrapper)=>{
     }
 }
 ```
-### props.children
+### props.children 
+> this.props.children[i]
 ```javascript
 class Layout extends Component {
     render(){
@@ -135,6 +136,7 @@ class Layout extends Component {
 </Layout>
 ```
 ### PropTypes
+> import PropTypes from 'prop-types'
 ```javascript
 import PropTypes from 'prop-types'
 class Comment extends Component {
