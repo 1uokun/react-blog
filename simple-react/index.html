@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>react简单实现</title>
+</head>
+<body>
+<script src="Component.js"></script>
+<script>
+    class View extends Component{
+        change(e){
+            console.log(e.target.value)
+        }
+
+        render(){
+            return {type:'ul', props:{}, children:[
+                    {type:'li',props:{class:'list'},children:[
+                            {type:'input', props:{value:'Niko',class:'list',keyup:this.change},children:[]},
+                        ]},
+                    {type:'li', props:{},children:['Bellic']}
+                ]}
+        }
+    }
+
+    new View()
+</script>
+</body>
+</html>
