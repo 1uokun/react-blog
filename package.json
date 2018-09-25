@@ -1,0 +1,33 @@
+{
+  "name": "jsx-without-react",
+  "version": "1.0.0",
+  "description": "不引用react的情况下配置并使用jsx语法",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --open"
+  },
+  "keywords": [
+    "jsx",
+    "with-react"
+  ],
+  "author": "https://github.com/1uokun/react-dom-cli/tree/jsx-without-react",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.42",
+    "@babel/core": "^7.0.0-beta.49",
+    "@babel/plugin-syntax-jsx": "^7.0.0-beta.49",
+    "@babel/plugin-transform-react-jsx": "^7.0.0-beta.49",
+    "@babel/preset-env": "^7.0.0-beta.49",
+    "@babel/register": "^7.0.0-beta.42",
+    "babel-loader": "^8.0.2",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.8"
+  },
+  "dependencies": {
+    "html-webpack-plugin": "^3.2.0"
+  }
+}
