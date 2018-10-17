@@ -1,5 +1,5 @@
-/node_modules
+node_modules
+*.log
 .idea
-*.iml
-yarn.lock
-demo.html
+.DS_Store
+
