@@ -1,18 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import {Provider} from 'react-redux'
+
 import App from './App'
 
-//根文件redux
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
-import Reducers from './reducers'
-let store = createStore(Reducers);
-
 ReactDOM.render(
-    <Provider store={store}>
+    <Provider>
         <App />
     </Provider>,
     document.getElementById('root')
 )
 
-// store.subscribe(render) 监听state的变化
+//使用Provider注入，让store和actions可以在子组件中，通过props访问使用
