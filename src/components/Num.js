@@ -3,13 +3,13 @@ import { observer, inject } from 'mobx-react';
 
 // inject 向业务组件注入 store，actions，和 Provider 配合使用
 // ⑤ 使用 inject decorator 和 observer decorator
-@inject('store', 'actions')
+@inject('life', 'actions')
 @observer
 export default class extends React.Component {
     render(){
-        const { store } = this.props;
+        const { life } = this.props;
         return (
-            <div>{store.num}</div>
+            <div>{life.num}</div>
         )
     }
 }

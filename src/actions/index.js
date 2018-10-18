@@ -1,16 +1,6 @@
-import {action} from 'mobx'
+import {store} from '../stores'
+import LifeAction from './LifeAction'
 
-export default class Actions {
-    constructor({store}) {
-        this.store = store;
-    }
-    // ② 使用 action decorator
-    @action
-    add_life = () => {
-        this.store.num++;
-    };
-    @action
-    cut_life = () => {
-        this.store.num--;
-    }
+export const actions = {
+    LifeAction: new LifeAction({store})
 }

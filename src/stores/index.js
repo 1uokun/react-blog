@@ -1,6 +1,5 @@
-import {observable} from 'mobx'
+import Life from './life'
 
-export default class Store {
-    // ① 使用 observable decorator
-    @observable num = 1;
-}
+export const store = {
+    life:new Life()
+};
