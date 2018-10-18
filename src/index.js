@@ -1,28 +1,17 @@
 import React from "react";
 import { render } from "react-dom";
-import DevTools from "mobx-react-devtools";
+import App from "./App";
 
-import TodoList from "./components/TodoList";
-import TodoListModel from "./models/TodoListModel";
-import TodoModel from "./models/TodoModel";
-
-const store = new TodoListModel();
+import { Provider} from 'mobx-react';
+import Store from './stores'
+import Actions from './actions'
+const store = new Store();
+const actions = new Actions({store});
 
 render(
-  <div>
-    {/*<DevTools />*/}
-    <TodoList store={store} />
-  </div>,
+    // ⑥使用Provider 在被 inject 的子组件里，可以通过 props.store props.actions 访问
+    <Provider store={store} actions={actions}>
+        <App />
+    </Provider>,
   document.getElementById("root")
 );
-
-store.addTodo("Get Coffee");
-store.addTodo("Write simpler code");
-store.todos[0].finished = true;
-
-setTimeout(() => {
-  store.addTodo("Get a cookie as well");
-}, 2000);
-
-// playing around in the console
-window.store = store;
