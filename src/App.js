@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Add from './component/Add'
-import Cut from './component/Cut'
+// import Cut from './component/Cut'
 import Txt from './component/Txt'
 
 function App (){
@@ -9,7 +9,7 @@ function App (){
         <div>
             <Txt />
             <Add />
-            <Cut />
+            {/*<Cut />*/}
         </div>
     )
 }

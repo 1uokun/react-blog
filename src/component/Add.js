@@ -1,24 +1,17 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {add_life} from '../actions/event'
+import {Consumer} from '../context'
 
 class Cut extends React.Component {
     render(){
         return (
-            <button onClick={this.props.add_life}>+1s</button>
+            <Consumer>
+                {value=>{
+                    return <button onClick={value.add_life}>+1s</button>
+                }}
+            </Consumer>
+
         )
     }
 }
 
-const mapStateToProps = (state) => {
-    return {}
-}
-const mapDispatchToProps = (dispatch) => {
-    return {
-        add_life : (params) => {
-            dispatch(add_life(params))
-        }
-    }
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(Cut)
+export default Cut

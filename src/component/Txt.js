@@ -1,18 +1,30 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import {connect} from "../connect";
+const cut_life = ()=>{
+    return 1
+}
 
 class Txt extends React.Component {
     render(){
         return (
-            <div>
-                {this.props.life.data}
-            </div>
+            <div>{this.props.num}</div>
         )
     }
 }
-const mapStateToProps = (state)=>{
+
+const mapStateToProps = (state) => {
     return {
-        life : state.life
+        num : state.num
+    }
+
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        cut_life : (params) => {
+            dispatch(cut_life(params))
+        }
     }
 }
-export default connect(mapStateToProps)(Txt)
+
+export default connect(mapStateToProps,mapDispatchToProps)(Txt)
