@@ -4,12 +4,12 @@ export default class LifeAction {
         this.store = store.life;
     }
 
-    @action
+    @action('我为长者续1s')
     add_life=()=>{
         this.store.num++;
     };
 
-    @action
+    @action('总有刁民想害朕')
     cut_life=()=>{
         this.store.num--;
     }
