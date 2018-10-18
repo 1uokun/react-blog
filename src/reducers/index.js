@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 
-import write from './write'
+import life from './life'
 
 export default combineReducers({
-    write
+    life
 })

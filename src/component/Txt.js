@@ -5,14 +5,14 @@ class Txt extends React.Component {
     render(){
         return (
             <div>
-                {this.props.write.data}
+                {this.props.life.data}
             </div>
         )
     }
 }
 const mapStateToProps = (state)=>{
     return {
-        write : state.write
+        life : state.life
     }
 }
 export default connect(mapStateToProps)(Txt)

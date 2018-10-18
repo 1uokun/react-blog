@@ -1,12 +1,13 @@
 import React from 'react'
-import Num from './containers/Num'
-import Add from './containers/Add'
-import Cut from './containers/Cut'
+
+import Add from './component/Add'
+import Cut from './component/Cut'
+import Txt from './component/Txt'
 
 function App (){
     return (
         <div>
-            <Num />
+            <Txt />
             <Add />
             <Cut />
         </div>
