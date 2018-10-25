@@ -1,4 +1,4 @@
-import * as type from '../stores/types'
+import * as type from './index'
 
 // //action creators 类型1
 // export const actionFunc = (params)=>({
