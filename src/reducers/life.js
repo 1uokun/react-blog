@@ -1,19 +1,14 @@
-import {CUT_LIFE, ADD_LIFE} from "../stores/types";
+import {CUT_LIFE, ADD_LIFE, LOADING_STATE} from "../actions";
 
-const initialState = {
-    data: 1,
-};
-
-
-//reducers一般一个文件里只放 1 个func
-export default function(state=initialState,action){
-    console.log(action)
+export default function(state={},action){
     switch(action.type){
         case ADD_LIFE:
-            return {data:state.data+=1};
+            return {...action.payload};
         case CUT_LIFE:
-            return {data:state.data-=1};
+            return {...action.payload};
+        case LOADING_STATE:
+            return {...action.payload};
         default:
-            return state
+            return {data:0,loading:false}
     }
 }
