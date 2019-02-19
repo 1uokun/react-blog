@@ -5,7 +5,7 @@
 * branck:mobx   <a href="https://github.com/1uokun/react-dom-cli/tree/mobx">mobx笔记</a>
 * branch:router  <a href="https://github.com/1uokun/react-dom-cli/tree/router">redux与router实践</a>
 * branch:typescript    <a href="https://github.com/1uokun/react-dom-cli/tree/typescript">TypeScript语言下的react组件写法</a>
-* branch:react-hock <a href="https://github.com/1uokun/react-dom-cli/tree/react-hock">react hock视频观后感</a>
+* branch:react-hook <a href="https://github.com/1uokun/react-dom-cli/tree/react-hook">react hock视频观后感</a>
 
 ## 相关博客
 
