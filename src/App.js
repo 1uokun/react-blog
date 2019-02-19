@@ -1,17 +1,36 @@
-import React from 'react'
-
-import Add from './component/Add'
-import Cut from './component/Cut'
-import Txt from './component/Txt'
+import React,{useState} from 'react'
 
 function App (){
+    const firstName = useFormChange('Niko');
+    const secondName = useFormChange('Bellic');
     return (
         <div>
-            <Txt />
-            <Add />
-            <Cut />
+            <label>{firstName.value}</label>
+            <input type="text"
+                   value={firstName.value}
+                   onChange={firstName.onChange}
+            />
+            <br/>
+            <label>{secondName.value}</label>
+            <input type="text"
+                   value={secondName.value}
+                   onChange={secondName.onChange}
+            />
         </div>
     )
+}
+
+function useFormChange(initialValue){
+    const [value,setValue] = useState(initialValue);
+
+    function handleChange(e){
+        setValue(e.target.value)
+    }
+
+    return {
+        value,
+        onChange:handleChange
+    }
 }
 
 export default App;
