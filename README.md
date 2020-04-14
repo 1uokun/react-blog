@@ -76,19 +76,25 @@ export default combineReducers({
    reducersName
 });
 ```
+## configureStore
+持久化中间件[配置文件](https://github.com/1uokun/react-blog/blob/redux-persist/src/configureStore.js)
 
 ## 根文件
-```
+```jsx harmony
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
 
-import Reducers from './reducers'
+- import Reducers from './reducers'
 
-let store = createStore(Reducers)
+- let store = createStore(Reducers)
++ const {store, persistor} = configureStore();
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <PersistGate persistor={persistor}>
+            <App />
+        </PersistGate>
     </Provider>,
     document.getElementById('#root')
 )
