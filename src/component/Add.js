@@ -5,8 +5,8 @@ class Cut extends React.Component {
     render(){
         return (
             <Consumer>
-                {value=>{
-                    return <button onClick={value.add_life}>+1s</button>
+                {context=>{
+                    return <button onClick={context.add_life}>+1s</button>
                 }}
             </Consumer>
 

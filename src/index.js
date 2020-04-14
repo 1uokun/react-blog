@@ -3,10 +3,9 @@ import ReactDOM from 'react-dom'
 import App from './App'
 
 import {Provider} from './context'
-import {value} from './value'
 
 ReactDOM.render(
-    <Provider value={value}>
+    <Provider>
         <App />
     </Provider>,
     document.getElementById('root')
