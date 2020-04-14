@@ -1,14 +1,12 @@
 import React from 'react'
-import {Consumer} from "../context";
+import {connect} from "../connect";
 
 class Cut extends React.Component {
     render(){
         return (
-            <Consumer>
-                {context=><button onClick={context.cut_life}>-1s</button>}
-            </Consumer>
+            <button onClick={this.props.cut_life}>-1s</button>
         )
     }
 }
 
-export default Cut
+export default connect(Cut)

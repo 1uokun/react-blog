@@ -1,15 +1,12 @@
 import React from 'react'
-import {Consumer} from '../context/index'
+import {connect} from "../connect";
 
 class Txt extends React.Component {
     render(){
         return (
-            <Consumer>
-                {context=><div>{context.num}</div>}
-            </Consumer>
-
+            <div>{this.props.num}</div>
         )
     }
 }
 
-export default Txt
+export default connect(Txt)

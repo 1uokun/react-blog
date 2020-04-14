@@ -1,105 +1,82 @@
-## 书签
- -[Redux总结](https://github.com/dwqs/blog/issues/35)
- -[dva教程](https://www.jianshu.com/p/69f13e9123d9)
+## 目录
+* branch:master <a href="#">reactjs API速览</a>
+* branch:redux  <a href="https://github.com/1uokun/react-dom-cli/tree/redux">redux笔记</a>
+* branch:redux-persist    <a href="https://github.com/1uokun/react-dom-cli/tree/redux-persist">redux与数据持久化</a>
+* branck:mobx   <a href="https://github.com/1uokun/react-dom-cli/tree/mobx">mobx笔记</a>
+* branch:router  <a href="https://github.com/1uokun/react-dom-cli/tree/router">redux与router实践</a>
+* branch:typescript    <a href="https://github.com/1uokun/react-dom-cli/tree/typescript">TypeScript语言下的react组件写法</a>
+* branch:react-hook <a href="https://github.com/1uokun/react-dom-cli/tree/react-hook">react hook视频观后感</a>
+* branch:context <a href="https://github.com/1uokun/react-dom-cli/tree/context">context connect</a>
 
+## 相关博客
 
-## stores
-`action`描述"发生了什么"， 使用`reducers`来根据action更新state的用法。
-**Store**就是把它们联系到一起的对象。
- - 维持应用的state；
- - 提供`getState()`方法获取state；
- - 提供`dispatch(action)`方法更新state；
- - 通过`subscribe(listener)`注册监听器；
- - 通过`subscribe(listener)`返回的函数 **注销**监听器
+- [ReactJS常用API快速一览](https://github.com/1uokun/react-dom-cli/issues/1)
+- Mobx工程化之--store和action集成与拆分 [commit](https://github.com/1uokun/react-dom-cli/commit/4890714d4a1fdc2d2a8d04fe0162a12817b280a1)
+- [redux与promise api工程化实战-并发请求](https://github.com/1uokun/react-dom-cli/issues/2)
 
+## API
+### React.createContext
+```jsx harmony
+const MyContext = React.createContext(defaultValue);
 ```
-//获得store值
-const mapStateToProps = (state) => {
-    return {}
-}
+仅当组件在树中上方没有匹配到提供者`Provider`时才使用`defaultValue`参数。
+这对于隔离测试组件而不进行包装很有帮助。
+注意：`defaultValue`值设为`undefined`将忽略赋值。
+ - 例如：
 
-//发送事件
-const mapDispatchToProps = (dispatch) => {
-    return {
-        _onHandleEvent: (params)=>{
-            dispatch(actionFunc(params))        //import actionFunc from '../actions/actionFunc'
-        }
-    }
-}
+```jsx harmony
+import React from 'react';
 
-export default connect (
-    mapStateToProps,
-    mapDispatchToProps
-)(Add)
-```
-
-### actions
-`Action`是把数据从应用传到store的有效载荷。
-它是store数据的**唯一**来源。一般来说会通过`store.dispatch()`将action传到store。
-
-
-> type : 常量CHANGE_LIANG
-<br />
-payload : 对象action数据的载体
-
-```
-export default actionFunc = (params) => {
-    return {type:CHANG_LIANG,payload:params}
-}
-
-//type.js 用于描述
-export const CHANG_LIANG = '常量'
-```
-
-### reducers
-Reducers指定了应用状态的变化如何响应`actions`并发送到store的，记住actions只是描述了*有事情发生了*这一事实，
-并没有描述应用如何更新state
-
-```
-import { combineReducers } from 'redux';
-
-const reducersName = (state,action)=>{
-    state = {
-        data : ''
-    }
-    switch(action.type){
-        case CHANG_LIANG:
-            return {
-                data : action.params    //出自payload:params
-            }
-        default:
-            return state
-    }
-}
-
-export default combineReducers({
-   reducersName
+const MyContext = React.createContext({
+  name:"Niko"
 });
+
+// 形态一
+class NoProvider extends React.Component {
+    static contextType = MyContext;
+    render(){
+        return (
+            <h1>{this.context.name}</h1>
+        )
+    }
+}
+// 形态二
+class NoProviderWithConsumer extends React.Component {
+    render(){
+        return (
+            <MyContext.Consumer>
+                {value=><h1>{value.name}</h1>}
+            </MyContext.Consumer>
+        )
+    }
+}
+// 形态三
+const NoProviderWithHook = () => {
+    const value = useContext(MyContext);
+    return value.name;
+};
+
+
+
+export default class extends React.Component {
+    render(){
+        return (
+            <div>
+                <NoProvider />
+                <NoProviderWithConsumer />
+                <NoProviderWithHook />
+            </div>
+        )
+    }
+}
 ```
 
-## 根文件
+### MyContext.displayName
+用于DevTools显示MyContext组件名
+```jsx harmony
+const MyContext = React.createContext(/* some value */);
+MyContext.displayName = 'MyDisplayName';
+
+<MyContext.Provider> // "MyDisplayName.Provider" in DevTools
+<MyContext.Consumer> // "MyDisplayName.Consumer" in DevTools
 ```
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
-
-import Reducers from './reducers'
-
-let store = createStore(Reducers)
-
-ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
-    document.getElementById('#root')
-)
-```
-
-
-## 简单总结
-`store` 用于描述`action`动作
-
-`action` 用于载荷来自组件`dispatch`的动作（函数）
-
-`reducers` 做一个桥指定`store`和对于的`action`
-
-组件内引入`action`的动作，使用`connect`API赋给组件`StateToProps`和`DispatchToProps`动作
