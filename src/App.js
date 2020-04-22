@@ -1,29 +1,47 @@
 import React, { Component,Fragment } from 'react';
-import PropTypes from 'prop-types';
 
-class A extends Component {
-    // static propTypes = {
-    //     name:PropTypes.string
-    // }
+class ErrorBoundary extends React.Component {
+    state={
+        error:undefined,
+        errorInfo:undefined
+    };
+
+    componentDidCatch(error, errorInfo) {
+        this.setState({error,errorInfo:errorInfo.componentStack})
+    }
+
     render(){
-        return <div>{this.props.name}</div>
+        return this.state.error!==undefined&&this.state.errorInfo!==undefined?<div>
+            <h1>Error Info</h1>
+            <details style={{ whiteSpace: 'pre-wrap' }}>
+                {this.state.errorInfo}
+            </details>
+        </div>:<div>
+            {this.props.children}
+        </div>
     }
 }
-A.propTypes = {
-    name:PropTypes.string
-}
+
 class B extends Component {
-    render(){
-        return <div>qwe</div>
+    a=()=>{
+        throw "asdasd"
+    };
+
+    render() {
+        this.a();
+        return (
+            <div>asd</div>
+        )
     }
 }
 
-export default class extends Component{
+export default class extends React.Component{
     render(){
         return (
             <Fragment>
-                <A name={'asd'}/>
-                <B />
+                <ErrorBoundary>
+                    <B />
+                </ErrorBoundary>
             </Fragment>
         )
     }
