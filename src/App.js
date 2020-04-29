@@ -16,6 +16,7 @@ export default class WordAdder extends React.PureComponent {
         super(props);
         this.state = {
             words: ['marklar'],
+            value:1,
         };
         this.handleClick = this.handleClick.bind(this);
     }
@@ -24,18 +25,23 @@ export default class WordAdder extends React.PureComponent {
         // This section is bad style and causes a bug
         const words = this.state.words;
         words.push('marklar');
+        this.setState({words: [...words,'marklar']});
         this.setState({words: words});
-        this.refs.list.forceUpdate()
-        this.forceUpdate(()=>{console.log(arguments)})
-        // this.setState({words: [...words,'marklar']});
+        // this.setState({value: this.state.value + 1});
+        // this.setState({value: this.state.value + 1});
+        // this.setState({value: this.state.value + 1});
+        this.setState((state) => ({ value: state.value + 1}));
+        this.setState((state) => ({ value: state.value + 1}));
+        this.setState((state) => ({ value: state.value + 1}));
     }
 
     render() {
         return (
             <div>
-                <div>{this.state.words.join(',')}</div>;
+                <div>{this.state.words.join(',')}</div>
+                {this.state.value}
                 <button onClick={this.handleClick} />
-                <ListOfWords words={this.state.words} ref={"list"}/>
+                <ListOfWords words={this.state.words} />
             </div>
         );
     }
