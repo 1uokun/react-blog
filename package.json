@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "immutability-helper": "^3.0.2",
     "prop-types": "^15.6.1",
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0",
-    "react-scripts": "1.1.4"
+    "react": "latest",
+    "react-addons-update": "^15.6.2",
+    "react-dom": "latest",
+    "react-scripts": "1.1.4",
+    "virtual-dom": "^2.1.1"
   },
   "scripts": {
     "start": "react-scripts start",

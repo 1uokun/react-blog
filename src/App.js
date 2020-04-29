@@ -1,30 +1,42 @@
-import React, { Component,Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import update from 'immutability-helper';
 
-class A extends Component {
-    // static propTypes = {
-    //     name:PropTypes.string
-    // }
-    render(){
-        return <div>{this.props.name}</div>
-    }
-}
-A.propTypes = {
-    name:PropTypes.string
-}
-class B extends Component {
-    render(){
-        return <div>qwe</div>
+// const ListOfWords = React.memo(function ListOfWords(props){
+//     return <div>{JSON.stringify(props.words)}</div>;
+// })
+
+class ListOfWords extends React.PureComponent {
+    render() {
+        return <div>{this.props.words.join(',')}</div>;
     }
 }
 
-export default class extends Component{
-    render(){
+export default class WordAdder extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            words: ['marklar'],
+        };
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick() {
+        // This section is bad style and causes a bug
+        const words = this.state.words;
+        words.push('marklar');
+        this.setState({words: words});
+        this.refs.list.forceUpdate()
+        this.forceUpdate(()=>{console.log(arguments)})
+        // this.setState({words: [...words,'marklar']});
+    }
+
+    render() {
         return (
-            <Fragment>
-                <A name={'asd'}/>
-                <B />
-            </Fragment>
-        )
+            <div>
+                <div>{this.state.words.join(',')}</div>;
+                <button onClick={this.handleClick} />
+                <ListOfWords words={this.state.words} ref={"list"}/>
+            </div>
+        );
     }
 }

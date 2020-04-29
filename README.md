@@ -1,16 +1,19 @@
-## 目录
-* branch:master <a href="#">reactjs API速览</a>
-* branch:redux  <a href="https://github.com/1uokun/react-dom-cli/tree/redux">redux笔记</a>
-* branch:redux-persist    <a href="https://github.com/1uokun/react-dom-cli/tree/redux-persist">redux与数据持久化</a>
-* branck:mobx   <a href="https://github.com/1uokun/react-dom-cli/tree/mobx">mobx笔记</a>
-* branch:router  <a href="https://github.com/1uokun/react-dom-cli/tree/router">redux与router实践</a>
-* branch:typescript    <a href="https://github.com/1uokun/react-dom-cli/tree/typescript">TypeScript语言下的react组件写法</a>
-* branch:react-hook <a href="https://github.com/1uokun/react-dom-cli/tree/react-hook">react hook视频观后感</a>
+## virtual-dom
+## virtual-dom/h
+```javascript
+return new VNode(tag, props, childNodes, key, namespace)
+```
+ - VNode
 
-## 相关博客
 
-- [ReactJS常用API快速一览](https://github.com/1uokun/react-dom-cli/issues/1)
-- Mobx工程化之--store和action集成与拆分 [commit](https://github.com/1uokun/react-dom-cli/commit/4890714d4a1fdc2d2a8d04fe0162a12817b280a1)
-- [redux与promise api工程化实战-并发请求](https://github.com/1uokun/react-dom-cli/issues/2)
+## PureComponent
+当`shouldComponentUpdate`返回`true`时，React必须走到
+该节点并检查它们。当diff后发现元素不相等，因此React必须更新DOM。
 
-## RSS
+当diff没有变化时，利用thunk可以使它不必更新DOM
+
+在PureComponent中，`shouldComponentUpdate`只是对`props`的值进行浅对比
+因此避免此问题的最简单方法是避免你正在使用的`state`或`props`值突变（mutating）
+即使用`immutable`,相关库有`immutable.js`、`immutability-helper`
+
+同理`React.memo()`
