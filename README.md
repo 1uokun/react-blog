@@ -20,10 +20,10 @@ function decrement(){
 }
 ```
 
-> **`decrement`报错信息：**
+> **`decrement`报错信息：**<br>
 > `throw new Error: Actions must be plain objects,Use custom middleware for async actions.`
-> `at dispatch (createStore.js:152)`
-> dispatch内必须是一个扁平化的object，
+> `at dispatch (createStore.js:152)`<br>
+> dispatch内必须是一个扁平化的object，<br>
 > 或者是能直接返回一个`{type:'REDUCERS',payload:data}`的函数
 
 > **缺点：**
