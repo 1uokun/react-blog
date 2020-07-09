@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>快速尝试JSX</title>
+</head>
+<body>
+<div id="APP"></div>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+<script type="text/babel">
+class LinkButton extends React.Component {
+    render(){
+        return (
+            <button>asd</button>
+        )
+    }
+}
+
+ReactDOM.render(React.createElement(LinkButton),document.getElementById("APP"))
+</script>
+</body>
+</html>
