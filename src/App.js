@@ -1,29 +1,25 @@
 import React, { Component,Fragment } from 'react';
-import PropTypes from 'prop-types';
+import debounce from 'lodash.debounce'
 
-class A extends Component {
-    // static propTypes = {
-    //     name:PropTypes.string
-    // }
-    render(){
-        return <div>{this.props.name}</div>
-    }
-}
-A.propTypes = {
-    name:PropTypes.string
-}
-class B extends Component {
-    render(){
-        return <div>qwe</div>
-    }
-}
 
 export default class extends Component{
+    onChange=(e)=>{
+        console.log(e&&e.target&&e.target.value)
+    };
+
+    debounceChange=debounce(this.onChange,400);
+
+
     render(){
         return (
             <Fragment>
-                <A name={'asd'}/>
-                <B />
+                <input type="text" onChange={this.onChange}/>
+
+                {/** doest work and need to add `event.persist()` **/}
+                <input type="text" onChange={this.debounceChange}/>
+
+                {/** 缓存所需的属性 **/}
+                <input type="text" onChange={({target:{ value }})=>this.debounceChange({target:{ value }})}/>
             </Fragment>
         )
     }
