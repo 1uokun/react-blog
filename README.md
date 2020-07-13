@@ -13,5 +13,6 @@
 - [ReactJS常用API快速一览](https://github.com/1uokun/react-dom-cli/issues/1)
 - Mobx工程化之--store和action集成与拆分 [commit](https://github.com/1uokun/react-dom-cli/commit/4890714d4a1fdc2d2a8d04fe0162a12817b280a1)
 - [redux与promise api工程化实战-并发请求](https://github.com/1uokun/react-dom-cli/issues/2)
+- 事件池的event.persist()与包裹函数应用  👉[./src/index.js](https://github.com/1uokun/react-dom-cli/tree/master/src/index.js)
+- shouldComponentUpdate的作用  👉[./src/SCU.js](https://github.com/1uokun/react-dom-cli/tree/master/src/SCU.js)
 
-## RSS
