@@ -8,6 +8,16 @@ export default class extends Component{
         value:""
     };
 
+    componentWillMount(){
+    }
+
+    componentWillUpdate(nextProps, nextState, nextContext) {
+    }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+
+    }
+
     onChange=(e)=>{
         this.setState({value:e&&e.target&&e.target.value})
         console.log(e&&e.target&&e.target.value)
