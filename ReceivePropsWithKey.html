@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>完全不受控组件+key</title>
+</head>
+<body>
+<div id="APP"></div>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+<script type="text/babel">
+    /**
+     * You Probably Don't Need Derived State
+     *
+     * @Plan A: Fully uncontrolled component with key (recommend)
+     * this html demo
+     *
+     * @Plan B: Fully controlled component (recommend)
+     *  eg:
+     *    <UncontrolledInput onChange={parent.handleChange} value={parent.state.value}/>
+     *
+     * @Plan C: Do not use ComponentWillReceiveProps (not recommend)
+     *   replace to getDerivedStateFromProps + componentDidUpdate
+     * **/
+    class UncontrolledInput extends React.Component {
+        state={
+            email:this.props.value,
+            prevPropEmail:""
+        };
+
+        handleChange=({target:{value}})=>{
+            this.setState({email:value})
+        };
+
+        //Plan A
+        componentWillReceiveProps(nextProps){
+            if(this.props.value !== nextProps.value){ //弊端：value在list中也可能存相同的
+                this.setState({email:nextProps.value})
+            }
+        }
+
+        //Plan C
+        static getDerivedStateFromProps(nextProps,prevState){
+            //该方法内禁止访问this
+            if(nextProps.value !== prevState.prevPropEmail){
+                //通过对比nextProps和prevState，返回一个用于更新状态的对象
+                //因为只要组件re-render（setState和forceUpdate）都会执行getDerivedStateFromProps
+                //所以加来一个prevPropEmail做代理对比
+                //无形中也增加了组件的【复杂度】
+                return {
+                    email: nextProps.value,
+                    prevPropEmail:nextProps.value
+                }
+            }
+
+            // 否则不需要更新状态时，返回null即可
+            return null
+        }
+
+        //Plan C
+        // 如果需要对this.props来做一些事，可以使用didUpdate
+        componentDidUpdate(nextProps, prevState, snapshot){
+            if(this.props.email){
+                //do sth for nextProps
+            }
+        }
+
+        render(){
+            return (
+                <label>
+                    <input value={this.state.email} onChange={this.handleChange} />
+                </label>
+            )
+        }
+    }
+
+    //Fully controlled component
+    function InputHook(props){
+        return (
+            <label>
+                <input value={props.email} onChange={this.props.handleChange} />
+            </label>
+        )
+    }
+
+    function InputHook2(props){
+        const [email,setEmail] = React.useState(props.value);
+        const [prevPropEmail,setPrevPropEmail] = React.useState(email);
+
+        React.useEffect(()=>{
+            if(props.value !== prevPropEmail){
+                setPrevPropEmail(props.value);
+                setEmail(props.value)
+            }
+        });
+        return (
+            <label>
+                <input value={email} onChange={({target:{value}})=>setEmail(value)} />
+            </label>
+        )
+    }
+
+    class View extends React.Component {
+        state={
+            list:[
+                {id:1,email:"aaa@email.com"},
+                {id:2,email:"bbb@email.com"},
+                {id:3,email:"aaa@email.com"},
+            ],
+            selectedIndex:0
+        };
+        render(){
+            return (
+                <div>
+                    {/** 利用 key的值发生改变时，React会创建一个组件实例而不是更新当前组件 **/}
+                    <UncontrolledInput
+                            key={this.state.selectedIndex}
+                            value={this.state.list[this.state.selectedIndex].email}
+                    />
+                    <br/>
+                    <InputHook2
+                        key={this.state.selectedIndex} //function component with key 会叠加生成组件
+                        value={this.state.list[this.state.selectedIndex].email}
+                    />
+                    <br/>
+                    {this.state.list.map((a,i)=>{
+                        return (
+                            <label key={a.id}>
+                                <input
+                                    type="radio"
+                                    name="account"
+                                    checked={this.state.selectedIndex===i}
+                                    onChange={() => this.setState({ selectedIndex: i })}
+                                />{" "}
+                                {a.email}
+                            </label>
+                        )
+                    })}
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(React.createElement(View),document.getElementById("APP"))
+</script>
+</body>
+</html>
