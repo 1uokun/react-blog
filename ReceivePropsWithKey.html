@@ -115,12 +115,12 @@
                 <div>
                     {/** 利用 key的值发生改变时，React会创建一个组件实例而不是更新当前组件 **/}
                     <UncontrolledInput
-                            key={this.state.selectedIndex}
+                            key={this.state.selectedIndex+1}
                             value={this.state.list[this.state.selectedIndex].email}
                     />
                     <br/>
                     <InputHook2
-                        key={this.state.selectedIndex} //function component with key 会叠加生成组件
+                        key={this.state.selectedIndex+2} //function component with key 会叠加生成组件
                         value={this.state.list[this.state.selectedIndex].email}
                     />
                     <br/>
