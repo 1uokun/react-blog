@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useRef} from 'react'
 import {useFormChange} from "./hook/useFormChange";
 import HookRules from "./component/HookRules";
 import {HookCustom} from "./component/HookCustom";
@@ -6,6 +6,9 @@ import {HookCounter} from "./component/HookCounter";
 import {DECREMENT, INCREMENT, JUMPDISPATCH, useCounterReducer} from "./hook/useCounterReducer";
 import {HookDispatchDemo} from "./component/Subcomponent/HookDispatchDemo";
 import {MyHookContext} from "./component/HookContext";
+import {HookRefText} from "./component/HookRef";
+import {DiffCreateRefWithUseRef} from "./component/DiffCreateRefWithUseRef";
+import {HookCallback} from "./component/HookCallback";
 
 function App (){
     const {value, onChange} = useFormChange('Niko');
@@ -15,10 +18,18 @@ function App (){
 
     const JumpDispatch = function(){
         counterState.obj.name = "niko";
-        dispatch({type:JUMPDISPATCH,payload:counterState})
+        dispatch({type:JUMPDISPATCH,payload:counterState});
         //并不会发生重新渲染,因为React用了Object.is比较算法
+
+        //ref自定义组件
+        if(HookCallbackRef.current){
+            HookCallbackRef.current.incrementOtherCounter()
+        }
     };
-    console.log("render ing...");
+
+    const HookCallbackRef = useRef(null);
+
+    console.log("render ing...",HookCallbackRef);
     return (
         <MyHookContext.Provider value={{counterState, dispatch}}>
         <ul>
@@ -80,6 +91,26 @@ function App (){
                 </h2>
                 <details>
                     <HookCustom />
+                </details>
+            </li>
+            <li>
+                <h2>
+                    useCallback实例
+                </h2>
+                <details>
+                    <HookCallback ref={HookCallbackRef}/>
+                </details>
+            </li>
+            <li>
+                <h2>
+                    useRef实例
+                </h2>
+                <details>
+                    <HookRefText />
+                </details>
+                <h3>DiffCreateRefWithUseRef</h3>
+                <details>
+                    <DiffCreateRefWithUseRef />
                 </details>
             </li>
         </ul>
