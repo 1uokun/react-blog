@@ -1,4 +1,4 @@
-/* useCallback */
+/* useCallback 1.引用相等 2.昂贵的计算*/
 /* useImperativeHandle + forwardRef */
 import React from 'react'
 const { useState, useCallback, useRef, useImperativeHandle, forwardRef } = React;

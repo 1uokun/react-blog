@@ -3,12 +3,13 @@ import {useFormChange} from "./hook/useFormChange";
 import HookRules from "./component/HookRules";
 import {HookCustom} from "./component/HookCustom";
 import {HookCounter} from "./component/HookCounter";
-import {DECREMENT, INCREMENT, JUMPDISPATCH, useCounterReducer} from "./hook/useCounterReducer";
+import forceUpdate, {DECREMENT, INCREMENT, JUMPDISPATCH, useCounterReducer} from "./hook/useCounterReducer";
 import {HookDispatchDemo} from "./component/Subcomponent/HookDispatchDemo";
 import {MyHookContext} from "./component/HookContext";
 import {HookRefText} from "./component/HookRef";
 import {DiffCreateRefWithUseRef} from "./component/DiffCreateRefWithUseRef";
 import {HookCallback} from "./component/HookCallback";
+import {HookMemo} from "./component/HookMemo";
 
 function App (){
     const {value, onChange} = useFormChange('Niko');
@@ -107,10 +108,19 @@ function App (){
                 </h2>
                 <details>
                     <HookRefText />
+                    <h3> - DiffCreateRefWithUseRef</h3>
+                    <details>
+                        <DiffCreateRefWithUseRef />
+                    </details>
                 </details>
-                <h3>DiffCreateRefWithUseRef</h3>
+
+            </li>
+            <li>
+                <h2>
+                    useMemo实例
+                </h2>
                 <details>
-                    <DiffCreateRefWithUseRef />
+                    <HookMemo />
                 </details>
             </li>
         </ul>

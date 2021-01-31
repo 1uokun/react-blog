@@ -19,6 +19,9 @@ export function useCounterReducer(){
     };
     const initialState = {count:1,obj:{name:"",age:0}};
     return useReducer(reducer, initialState);
+
+    //模拟forceUpdate
+    const [ignore, forceUpdate] = useReducer(x => x+1,0);
 }
 
 /**
