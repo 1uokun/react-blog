@@ -1,21 +1,23 @@
-import React,{useState,useRef} from 'react'
+import React,{useRef} from 'react'
 import {useFormChange} from "./hook/useFormChange";
 import HookRules from "./component/HookRules";
 import {HookCustom} from "./component/HookCustom";
 import {HookCounter} from "./component/HookCounter";
-import forceUpdate, {DECREMENT, INCREMENT, JUMPDISPATCH, useCounterReducer} from "./hook/useCounterReducer";
+import {DECREMENT, INCREMENT, JUMPDISPATCH, useCounterReducer, useForceUpdate} from "./hook/useCounterReducer";
 import {HookDispatchDemo} from "./component/Subcomponent/HookDispatchDemo";
 import {MyHookContext} from "./component/HookContext";
 import {HookRefText} from "./component/HookRef";
 import {DiffCreateRefWithUseRef} from "./component/DiffCreateRefWithUseRef";
 import {HookCallback} from "./component/HookCallback";
 import {HookMemo} from "./component/HookMemo";
+import {HookLayoutEffect} from "./component/HookLayoutEffect";
 
 function App (){
     const {value, onChange} = useFormChange('Niko');
     const secondName = useFormChange('Bellic');
 
     const [counterState, dispatch] = useCounterReducer();
+    const forceUpdate = useForceUpdate();
 
     const JumpDispatch = function(){
         counterState.obj.name = "niko";
@@ -62,18 +64,22 @@ function App (){
             </li>
             <li>
                 <h2>
-                    reducer重写HookCounter
+                    useReducer实例
                 </h2>
                 <details>
+                <h3> - reducer重写HookCounter </h3>
                     Count: {counterState.count}
                     <br/>
                     <button onClick={()=>dispatch({type:INCREMENT,payload:{...counterState,count:counterState.count+1}})}>+</button>
                     <button onClick={()=>dispatch({type:DECREMENT})}>-</button>
                     <br/>
                     <button onClick={JumpDispatch}>JumpDispatch</button>
-                </details>
-                <details>
+
+                    <br/>
+                    <br/>
                     <HookDispatchDemo />
+                <h3> - 模拟强制更新forceUpdate</h3>
+                <button onClick={()=>forceUpdate()}>forceUpdate</button>
                 </details>
             </li>
 
@@ -121,6 +127,14 @@ function App (){
                 </h2>
                 <details>
                     <HookMemo />
+                </details>
+            </li>
+            <li>
+                <h2>
+                    useLayoutEffect实例
+                </h2>
+                <details>
+                    <HookLayoutEffect />
                 </details>
             </li>
         </ul>
