@@ -4,13 +4,15 @@
   "private": true,
   "dependencies": {
     "eslint-plugin-react-hooks": "^4.2.0",
+    "fast-deep-equal": "^3.1.3",
     "react": "latest",
     "react-dom": "latest",
     "react-redux": "latest",
     "react-scripts": "latest",
     "redux": "latest",
     "redux-logger": "latest",
-    "redux-thunk": "latest"
+    "redux-thunk": "latest",
+    "shallowequal": "^1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",

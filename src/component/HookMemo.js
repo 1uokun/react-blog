@@ -1,5 +1,6 @@
 /* useMemo */
 import React,{useReducer,useEffect,useCallback,useMemo} from 'react';
+import {useRenderTimes} from "./HookRef";
 
 export function HookMemo(){
     const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
@@ -9,17 +10,29 @@ export function HookMemo(){
     const _baz = [1, 2, 3];
     const bar = useCallback(_bar,[]);
     const baz = useMemo(()=>_baz,[]);
+
     return (
         <>
-        <Sub bar={_bar} baz={_baz} primitiveValue={1} ignored={ignored}/>
-        <Sub bar={bar} baz={baz} primitiveValue={2} ignored={ignored}/>
-        <button onClick={forceUpdate}>re-render</button>
+            <Memoized>
+                <Sub bar={_bar} baz={_baz} primitiveValue={primitiveValue} ignored={ignored}/>
+            </Memoized>
+            <Memoized>
+                <Sub bar={bar} baz={baz} primitiveValue={2} ignored={ignored}/>
+            </Memoized>
+
+            <button onClick={forceUpdate}>re-render</button>
+
+
+            <p>测试memo</p>
+            <Memoized>only text as children</Memoized>
+            <Memoized><b>nested children嵌套子组件</b></Memoized>
         </>
     )
 }
 
 function Sub({bar,baz,primitiveValue,ignored}){
     const options = {bar, baz,primitiveValue};
+
     // const options = useMemo(()=>{return {bar, baz,primitiveValue,ignored}},[]);;
     useEffect(()=>{
         console.log("re-render",options.primitiveValue) // re-render 1
@@ -31,5 +44,22 @@ function Sub({bar,baz,primitiveValue,ignored}){
     //useCallback缓存函数的引用
     //细化每一个子节点来模拟shouldComponentUpdate
 
-    return <></>
+    const times = useRenderTimes();
+
+    return <>子组件内不会刷新就好，Memoized父组件刷新无所谓:<br/>{times}</>
 }
+
+
+//link: https://gist.github.com/slikts/e224b924612d53c1b61f359cfb962c06
+const Memoized =React.memo(function(props){
+    const times = useRenderTimes();
+    const memoChildren = useMemo(()=>props.children ,[]);//core
+    return (
+        <div>
+            {memoChildren}
+            <p>
+                Renders: {times}
+            </p>
+        </div>
+    )
+});
