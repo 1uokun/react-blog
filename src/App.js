@@ -5,7 +5,7 @@ import {HookCustom} from "./component/HookCustom";
 import {HookCounter} from "./component/HookCounter";
 import {DECREMENT, INCREMENT, JUMPDISPATCH, useCounterReducer, useForceUpdate} from "./hook/useCounterReducer";
 import {HookDispatchDemo} from "./component/Subcomponent/HookDispatchDemo";
-import {MyHookContext, MyHookContextProvider} from "./component/HookContext";
+import {MultipleContext, MyHookContext, MyHookContextProvider} from "./component/HookContext";
 import {HookRefText} from "./component/HookRef";
 import {DiffCreateRefWithUseRef} from "./component/DiffCreateRefWithUseRef";
 import {HookCallback} from "./component/HookCallback";
@@ -87,7 +87,7 @@ function App (){
                     useReducer/useContext实例
                 </h2>
                 <details>
-                <h3> - reducer重写HookCounter </h3>
+                    <h3> - reducer重写HookCounter </h3>
                     Count: {counterState.count}
                     <br/>
                     <button onClick={()=>dispatch({type:INCREMENT,payload:{...counterState,count:counterState.count+1}})}>+</button>
@@ -98,8 +98,18 @@ function App (){
                     <br/>
                     <br/>
                     <HookDispatchDemo />
-                <h3> - 模拟强制更新forceUpdate</h3>
-                <button onClick={()=>forceUpdate()}>forceUpdate</button>
+                    <h3> - 模拟强制更新forceUpdate</h3>
+                    <button onClick={()=>forceUpdate()}>forceUpdate</button>
+
+                    <fieldset>
+                        <legend>
+                            <h3> - Context嵌套使用 </h3>
+
+                        </legend>
+                        对于最终合并后组件，也要HOC一层，也就是再封装一层ConfigProviderOutside，并传入props.children
+                    </fieldset>
+                    <br/>
+                    <MultipleContext />
                 </details>
             </li>
 

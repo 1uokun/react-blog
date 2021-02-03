@@ -1,6 +1,7 @@
 /* useContext实践 */
 import React from 'react'
-import {useCounterReducer} from "../hook/useCounterReducer";
+import {useCounterReducer, useForceUpdate} from "../hook/useCounterReducer";
+import {useRenderTimes} from "./HookRef";
 
 export const MyHookContext = React.createContext(null);
 
@@ -39,3 +40,65 @@ export function MyHookContextProvider(props){
         </MyHookContext.Provider>
     )
 }
+
+export const ContextA = React.createContext({});
+export const ContextB = React.createContext({});
+
+export function ProviderA(props){
+    return (
+        <ContextA.Provider value={props.value}>
+            {props.children}
+        </ContextA.Provider>
+    )
+}
+export function ProviderB(props){
+    const times = useRenderTimes();
+    return (
+        <ContextB.Provider value={props.value}>
+            {props.children}
+            <p>{"Other Sub Context render times: "+times}</p>
+        </ContextB.Provider>
+    )
+}
+
+function ConfigureProvider(props){
+    return (
+        <ProviderA value={props.value}>
+            <ProviderB >
+                {props.children}
+            </ProviderB>
+        </ProviderA>
+    )
+}
+
+
+//调用ConfigureProvider并使用，
+//ConfigureProvider下的所有Context都会无必要地渲染
+export function MultipleContext(){
+    const forceUpdate = useForceUpdate();
+
+    return (
+        <ConfigureProvider>
+            <button onClick={forceUpdate}>forceUpdate</button>
+        </ConfigureProvider>
+    )
+}
+
+//优化：给ConfigureProvider再封装一层ConfigProviderOutside
+//copy: https://zhuanlan.zhihu.com/p/313983390
+/*
+export function ConfigProviderOutside(){
+    const forceUpdate = useForceUpdate();
+
+    return (
+        <button onClick={forceUpdate}>forceUpdate</button>
+    )
+}
+export function MultipleContext(){
+    return (
+        <ConfigureProvider>
+            <ConfigProviderOutside />
+        </ConfigureProvider>
+    )
+}
+*/
