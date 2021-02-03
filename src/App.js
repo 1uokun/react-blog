@@ -5,12 +5,13 @@ import {HookCustom} from "./component/HookCustom";
 import {HookCounter} from "./component/HookCounter";
 import {DECREMENT, INCREMENT, JUMPDISPATCH, useCounterReducer, useForceUpdate} from "./hook/useCounterReducer";
 import {HookDispatchDemo} from "./component/Subcomponent/HookDispatchDemo";
-import {MyHookContext} from "./component/HookContext";
+import {MyHookContext, MyHookContextProvider} from "./component/HookContext";
 import {HookRefText} from "./component/HookRef";
 import {DiffCreateRefWithUseRef} from "./component/DiffCreateRefWithUseRef";
 import {HookCallback} from "./component/HookCallback";
 import {HookMemo} from "./component/HookMemo";
 import {HookLayoutEffect} from "./component/HookLayoutEffect";
+import {HookCaptureValue, HookCaptureValueWithRef} from "./component/HookCaptureValue";
 
 function App (){
     const {value, onChange} = useFormChange('Niko');
@@ -34,7 +35,7 @@ function App (){
 
     console.log("render ing...",HookCallbackRef);
     return (
-        <MyHookContext.Provider value={{counterState, dispatch}}>
+        <MyHookContextProvider value={{counterState, dispatch}}>
         <ul>
             <li>
                 <h2>
@@ -56,15 +57,34 @@ function App (){
             </li>
             <li>
                 <h2>
-                    如果我的 effect 的依赖频繁变化，我该怎么办？
+                    useEffect实例
                 </h2>
                 <details>
-                    <HookCounter />
+                    <h3>
+                         - 如果我的 effect 的依赖频繁变化，我该怎么办？
+                    </h3>
+                    <details>
+                        <HookCounter />
+                    </details>
+
+                    <h3> - 理解Capture Value特性 </h3>
+                    <details>
+                        <ul>
+                            <li>
+                                <h4> - 状态值为什么不是最新的？ </h4>
+                                <HookCaptureValue/>
+                            </li>
+                            <li>
+                                <h4> - 如何获取即刻的count变量？ </h4>
+                                <HookCaptureValueWithRef/>
+                            </li>
+                        </ul>
+                    </details>
                 </details>
             </li>
             <li>
                 <h2>
-                    useReducer实例
+                    useReducer/useContext实例
                 </h2>
                 <details>
                 <h3> - reducer重写HookCounter </h3>
@@ -138,7 +158,7 @@ function App (){
                 </details>
             </li>
         </ul>
-        </MyHookContext.Provider>
+        </MyHookContextProvider>
     )
 }
 
