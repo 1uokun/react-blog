@@ -1,6 +1,6 @@
 /* useContext实践 */
 import React from 'react'
-import {useCounterReducer, useForceUpdate} from "../hook/useCounterReducer";
+import {useForceUpdate} from "../hook/useCounterReducer";
 import {useRenderTimes} from "./HookRef";
 
 export const MyHookContext = React.createContext(null);
@@ -62,8 +62,19 @@ export function ProviderB(props){
 }
 
 function ConfigureProvider(props){
+    /**
+     * 看这里！！！
+     * @answer: memorize contextValue 当然引用值可以，原始值没必要
+     * **/
+    const {theme} = props;
+    const memoedConfig = React.useMemo(
+        ()=>{
+            return {theme}
+        },
+        [theme]
+    );
     return (
-        <ProviderA value={props.value}>
+        <ProviderA value={memoedConfig}>
             <ProviderB >
                 {props.children}
             </ProviderB>
@@ -76,13 +87,45 @@ function ConfigureProvider(props){
 //ConfigureProvider下的所有Context都会无必要地渲染
 export function MultipleContext(){
     const forceUpdate = useForceUpdate();
+    const [theme, setTheme] = React.useState({color:'red'});
 
+    /**
+     * 看这里！！！
+     *
+     * 如果是一个常量的话 要么ref，要么这里也要memo啊
+     * **/
+    const _theme = React.useMemo(()=>{
+        return {color:'green'}
+    },[]);
+    const __theme = React.useRef({color:'purple'}).current;
     return (
-        <ConfigureProvider>
+        <ConfigureProvider theme={theme}>
+            <ComponentUseContextMemo />
             <button onClick={forceUpdate}>forceUpdate</button>
+            <button onClick={()=>setTheme({color:'blue'})}>change theme</button>
         </ConfigureProvider>
     )
 }
+
+/**
+ * 看这里！！！这个才是重点
+ *
+ * @description 为了防止不必要的重新渲染，我们加了memo
+ * @description 但是当我们在memo组件中使用Context后，memo将doest work
+ * @description 强调被使用的Context的value一定是一个非原始值，即引用值 {xx:props.xx}
+ * @question: 那么如何优化呢？
+ * @answer: 将contextValue也进行memo化，详见function ConfigureProvider
+ * **/
+function ComponentUseContext(){
+    const context = React.useContext(ContextA);
+    const times = useRenderTimes();
+    return (
+        <div>
+            <p style={context.theme}>{"Component use Context render times: "+times}</p>
+        </div>
+    )
+}
+const ComponentUseContextMemo = React.memo(ComponentUseContext);
 
 //优化：给ConfigureProvider再封装一层ConfigProviderOutside
 //copy: https://zhuanlan.zhihu.com/p/313983390
@@ -102,3 +145,24 @@ export function MultipleContext(){
     )
 }
 */
+
+//优化2：memorize context value
+//copy: https://github.com/ant-design/ant-design/pull/28792/files#diff-0a9895a32672ec55a084aa7165fc8666008942903b8e51e30b662e9e1ecffb56R144
+/*
+function ConfigureProvider(props){
+    const {theme} = props;
+    const memoedConfig = React.useMemo(
+        ()=>{
+            return {theme}
+        },
+        [theme]
+    );
+    return (
+        <ProviderA value={memoedConfig}>
+            <ProviderB >
+                {props.children}
+            </ProviderB>
+        </ProviderA>
+    )
+}
+ */
