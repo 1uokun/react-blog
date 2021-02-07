@@ -12,6 +12,7 @@ import {HookCallback} from "./component/HookCallback";
 import {HookMemo} from "./component/HookMemo";
 import {HookLayoutEffect} from "./component/HookLayoutEffect";
 import {HookCaptureValue, HookCaptureValueWithRef} from "./component/HookCaptureValue";
+import {HookState} from "./component/HookState";
 
 function App (){
     const {value, onChange} = useFormChange('Niko');
@@ -53,6 +54,17 @@ function App (){
                            value={secondName.value}
                            onChange={secondName.onChange}
                     />
+                </details>
+            </li>
+            <li>
+                <h2>
+                    useState实例
+                </h2>
+                <details>
+                    <h3>
+                        - 惰性初始state
+                    </h3>
+                    <HookState />
                 </details>
             </li>
             <li>
