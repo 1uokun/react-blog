@@ -129,6 +129,8 @@ const ComponentUseContextMemo = React.memo(ComponentUseContext);
 
 //优化：给ConfigureProvider再封装一层ConfigProviderOutside
 //copy: https://zhuanlan.zhihu.com/p/313983390
+// 当然这种优化带有一定性的误导性，不管用不用封装一层ConfigProviderOutside，
+// 换成其他的任何类型的组件都会re-render，不能让Context背锅，这是React.createElement与层级关系导致的。
 /*
 export function ConfigProviderOutside(){
     const forceUpdate = useForceUpdate();
