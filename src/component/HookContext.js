@@ -41,17 +41,17 @@ export function MyHookContextProvider(props){
     )
 }
 
-export const ContextA = React.createContext({});
-export const ContextB = React.createContext({});
+const ContextA = React.createContext({});
+const ContextB = React.createContext({});
 
-export function ProviderA(props){
+function ProviderA(props){
     return (
         <ContextA.Provider value={props.value}>
             {props.children}
         </ContextA.Provider>
     )
 }
-export function ProviderB(props){
+function ProviderB(props){
     const times = useRenderTimes();
     return (
         <ContextB.Provider value={props.value}>
@@ -101,6 +101,7 @@ export function MultipleContext(){
     return (
         <ConfigureProvider theme={theme}>
             <ComponentUseContextMemo />
+            <ContextAConsumer />
             <button onClick={forceUpdate}>forceUpdate</button>
             <button onClick={()=>setTheme({color:'blue'})}>change theme</button>
         </ConfigureProvider>
@@ -126,6 +127,34 @@ function ComponentUseContext(){
     )
 }
 const ComponentUseContextMemo = React.memo(ComponentUseContext);
+
+
+/**
+ * Consumer模式
+ *
+ * 使用PureComponent即可优化
+ * **/
+class ContextAConsumer extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.times=0
+    }
+
+    render(){
+        this.times ++;
+        return (
+            <ContextA.Consumer>
+                {({theme})=>{
+                    return (
+                        <div>
+                            <p style={theme}>{"Consumer模式 render times: "+this.times}</p>
+                        </div>
+                    )
+                }}
+            </ContextA.Consumer>
+        )
+    }
+}
 
 //优化：给ConfigureProvider再封装一层ConfigProviderOutside
 //copy: https://zhuanlan.zhihu.com/p/313983390
