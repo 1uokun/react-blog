@@ -132,7 +132,7 @@ const ComponentUseContextMemo = React.memo(ComponentUseContext);
 /**
  * Consumer模式
  *
- * 使用PureComponent即可优化
+ * 使用PureComponent 或者 React.memo 即可优化
  * **/
 class ContextAConsumer extends React.PureComponent {
     constructor(props) {
@@ -155,6 +155,20 @@ class ContextAConsumer extends React.PureComponent {
         )
     }
 }
+const ContextAConsumerFunction = React.memo(function(){
+    const times = useRenderTimes();
+    return (
+        <ContextA.Consumer>
+            {({theme})=>{
+                return (
+                    <div>
+                        <p style={theme}>{"Consumer模式 render times: "+times}</p>
+                    </div>
+                )
+            }}
+        </ContextA.Consumer>
+    )
+});
 
 //优化：给ConfigureProvider再封装一层ConfigProviderOutside
 //copy: https://zhuanlan.zhihu.com/p/313983390
