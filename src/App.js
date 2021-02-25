@@ -11,7 +11,7 @@ import {DiffCreateRefWithUseRef} from "./component/DiffCreateRefWithUseRef";
 import {HookCallback} from "./component/HookCallback";
 import {HookMemo} from "./component/HookMemo";
 import {HookLayoutEffect} from "./component/HookLayoutEffect";
-import {HookCaptureValue, HookCaptureValueWithRef} from "./component/HookCaptureValue";
+import {HookCaptureValue, HookCaptureValueWithRef, HookClosureTrapWithReducer} from "./component/HookCaptureValue";
 import {HookState} from "./component/HookState";
 
 function App (){
@@ -83,12 +83,16 @@ function App (){
                     <details>
                         <ul>
                             <li>
-                                <h4> - 状态值为什么不是最新的？ </h4>
+                                <h4> - 状态值为什么不是最新的？（闭包陷阱） </h4>
                                 <HookCaptureValue/>
                             </li>
                             <li>
-                                <h4> - 如何获取即刻的count变量？ </h4>
+                                <h4> - 如何获取即刻的count变量？(useRef) </h4>
                                 <HookCaptureValueWithRef/>
+                            </li>
+                            <li>
+                                <h4> - 使用useReducer替代useState解决闭包陷阱 </h4>
+                                <HookClosureTrapWithReducer/>
                             </li>
                         </ul>
                     </details>
