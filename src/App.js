@@ -1,20 +1,27 @@
 import React,{Component,lazy,Suspense} from 'react'
+import Boundary from "./Boundary";
 
-import Add from './component/Add'
-import Cut from './component/Cut'
-import {Icon} from 'antd-mobile'
-const Txt = lazy(()=>import('./component/Txt'));
+const LazyComponent = lazy(()=>import('./HugeComponent'));
 
-function App (){
-    return (
-        <div>
-            <Suspense fallback={<Icon type="loading" />}>
-                <Txt />
-            </Suspense>
-            <Add />
-            <Cut />
-        </div>
-    )
+class App extends React.Component {
+    state={
+        visible:false
+    };
+    handleShow=()=>{
+        this.setState({visible:true})
+    };
+    render(){
+        return (
+            <div>
+                <button onClick={this.handleShow}>show huge component</button>
+                {this.state.visible&&<Suspense fallback={<div>loading...</div>}>
+                    <LazyComponent />
+                </Suspense>}
+
+                <Boundary />
+            </div>
+        )
+    }
 }
 
 export default App;
