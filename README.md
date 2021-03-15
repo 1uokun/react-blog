@@ -1,12 +1,14 @@
 ## 目录
-* branch:master <a href="#">reactjs API速览</a>
-* branch:redux  <a href="https://github.com/1uokun/react-dom-cli/tree/redux">redux笔记</a>
-* branch:redux-thunk  <a href="https://github.com/1uokun/react-dom-cli/tree/redux-thunk">redux-thunk异步实践</a>
-* branch:redux-persist    <a href="https://github.com/1uokun/react-dom-cli/tree/redux-persist">redux与数据持久化</a>
-* branck:mobx   <a href="https://github.com/1uokun/react-dom-cli/tree/mobx">mobx笔记</a>
-* branch:router  <a href="https://github.com/1uokun/react-dom-cli/tree/router">redux与router实践</a>
-* branch:typescript    <a href="https://github.com/1uokun/react-dom-cli/tree/typescript">TypeScript语言下的react组件写法</a>
-* branch:react-hook <a href="https://github.com/1uokun/react-dom-cli/tree/react-hook">react hook视频观后感</a>
+* branch:master <a href="#">《reactjs API速览》</a>
+* branch:redux  <a href="https://github.com/1uokun/react-dom-cli/tree/redux">《redux笔记》</a>
+* branch:redux-thunk  <a href="https://github.com/1uokun/react-dom-cli/tree/redux-thunk">《redux-thunk异步实践》</a>
+* branch:redux-persist    <a href="https://github.com/1uokun/react-dom-cli/tree/redux-persist">《redux与数据持久化》</a>
+* branck:mobx   <a href="https://github.com/1uokun/react-dom-cli/tree/mobx">《mobx笔记》</a>
+* branch:router  <a href="https://github.com/1uokun/react-dom-cli/tree/router">《redux与router实践》</a>
+* branch:typescript    <a href="https://github.com/1uokun/react-dom-cli/tree/typescript">《TypeScript语言下的react组件写法》</a>
+* branch:virtual-dom <a href="https://github.com/1uokun/react-dom-cli/tree/virtual-dom">《类virtual-dom源码、setState队列更新🌟》</a>
+* branch:react-hook <a href="https://github.com/1uokun/react-dom-cli/tree/react-hook">《react hook视频观后感、全系列案例🌟》</a>
+* branch:vue <a href="https://github.com/1uokun/react-dom-cli/tree/vue">《vue和react可以互相学习的思想》</a>
 
 ## 相关博客
 
