@@ -1,5 +1,6 @@
 {
     "name":"luokun",
     "age": 26,
-    "school": "CDC"
+    "school": "CDC",
+    "a":"a"
 }
