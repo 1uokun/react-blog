@@ -1,1 +1,2 @@
 project.private.config.json merge=ours
+project.private.config.json diff=nodiff
