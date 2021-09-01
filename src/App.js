@@ -1,30 +1,20 @@
-import React, { Component,Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+import Swiper,{SwipeItem} from "./swiper2";
 
-class A extends Component {
-    // static propTypes = {
-    //     name:PropTypes.string
-    // }
-    render(){
-        return <div>{this.props.name}</div>
-    }
-}
-A.propTypes = {
-    name:PropTypes.string
-}
-class B extends Component {
-    render(){
-        return <div>qwe</div>
-    }
-}
-
-export default class extends Component{
-    render(){
-        return (
-            <Fragment>
-                <A name={'asd'}/>
-                <B />
-            </Fragment>
-        )
-    }
+export default function App() {
+  return (
+    <>
+      <Swiper vertical style={{ height: '200px' }} loop autoplay>
+        <SwipeItem>Slide 1</SwipeItem>
+        <SwipeItem>Slide 2</SwipeItem>
+        <SwipeItem>Slide 3</SwipeItem>
+        <SwipeItem>Slide 4</SwipeItem>
+        <SwipeItem>Slide 5</SwipeItem>
+        <SwipeItem>Slide 6</SwipeItem>
+        <SwipeItem>Slide 7</SwipeItem>
+        <SwipeItem>Slide 8</SwipeItem>
+        <SwipeItem>Slide 9</SwipeItem>
+      </Swiper>
+    </>
+  )
 }

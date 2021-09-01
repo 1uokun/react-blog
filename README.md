@@ -1,19 +1,70 @@
-## 目录
-* branch:master <a href="#">《reactjs API速览》</a>
-* branch:redux  <a href="https://github.com/1uokun/react-dom-cli/tree/redux">《redux笔记》</a>
-* branch:redux-thunk  <a href="https://github.com/1uokun/react-dom-cli/tree/redux-thunk">《redux-thunk异步实践》</a>
-* branch:redux-persist    <a href="https://github.com/1uokun/react-dom-cli/tree/redux-persist">《redux与数据持久化》</a>
-* branck:mobx   <a href="https://github.com/1uokun/react-dom-cli/tree/mobx">《mobx笔记》</a>
-* branch:router  <a href="https://github.com/1uokun/react-dom-cli/tree/router">《redux与router实践》</a>
-* branch:typescript    <a href="https://github.com/1uokun/react-dom-cli/tree/typescript">《TypeScript语言下的react组件写法》</a>
-* branch:virtual-dom <a href="https://github.com/1uokun/react-dom-cli/tree/virtual-dom">《类virtual-dom源码、setState队列更新🌟》</a>
-* branch:react-hook <a href="https://github.com/1uokun/react-dom-cli/tree/react-hook">《react hook视频观后感、全系列案例🌟》</a>
-* branch:vue <a href="https://github.com/1uokun/react-dom-cli/tree/vue">《vue和react可以互相学习的思想》</a>
+# Getting Started with Create React App
 
-## 相关博客
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-- [ReactJS常用API快速一览](https://github.com/1uokun/react-dom-cli/issues/1)
-- Mobx工程化之--store和action集成与拆分 [commit](https://github.com/1uokun/react-dom-cli/commit/4890714d4a1fdc2d2a8d04fe0162a12817b280a1)
-- [redux与promise api工程化实战-并发请求](https://github.com/1uokun/react-dom-cli/issues/2)
+## Available Scripts
 
-## RSS
+In the project directory, you can run:
+
+### `yarn start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
+
+### `yarn test`
+
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `yarn build`
+
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `yarn eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `yarn build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
